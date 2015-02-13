@@ -109,3 +109,17 @@ describe('freeze', function() {
   });
 });
 
+describe('WrappedDate should have static methods', function() {
+  it('WrappedDate should have static methods', function() {
+    expect(_Date.parse).to.equal(Date.parse);
+    expect(_Date.UTC).to.equal(Date.UTC);
+    expect(_Date.now).to.be.a('Function');
+    expect(_Date.now).to.not.equal(Date.now);
+  });
+
+  it('WrappedDate should not have any enumerable property', function() {
+    for (var key in _Date) {
+      assert.fail();
+    }
+  });
+});
