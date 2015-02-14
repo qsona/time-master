@@ -65,11 +65,19 @@ describe('delay', function() {
 
   afterEach(clockManager.clear);
 
-  it('should be delayed', function() {
+  it('should put back', function() {
     clockManager.delay(ONE_HOUR);
     var date1 = new Date();
     var date2 = new _Date();
     assert(nearlyEqual(date1.getTime(), date2.getTime() - ONE_HOUR), 'yeah');
+  });
+
+  // TODO
+  it('should makimodoshi (opposite of "put back")', function() {
+    clockManager.delay(-ONE_HOUR);
+    var date1 = new Date();
+    var date2 = new _Date();
+    assert(nearlyEqual(date1.getTime() - ONE_HOUR, date2.getTime()), 'yeah');
   });
 
 });
@@ -106,6 +114,8 @@ describe('freeze', function() {
   it('should create proper date', function() {
     var date = new _Date(100);
     expect(date.getTime()).to.equal(100);
+    date = new Date(Date.UTC(1970, 0, 1));
+    expect(date.getTime()).to.equal(0);
   });
 });
 
@@ -121,5 +131,23 @@ describe('WrappedDate should have static methods', function() {
     for (var key in _Date) {
       assert.fail();
     }
+  });
+});
+
+describe('expose', function() {
+  it('should override global Date', function() {
+    clockManager.freeze(100);
+    expect(_Date.now()).to.equal(100);
+
+    clockManager.expose();
+    expect(Date).to.equal(_Date);
+    expect(Date.now()).to.equal(100);
+    var date = new Date(Date.UTC(1970, 0, 1));
+    expect(date.getTime()).to.equal(0);
+
+    clockManager.unexpose();
+    expect(Date).to.not.equal(_Date);
+    expect(Date.now()).to.not.equal(100);
+    expect(_Date.now()).to.equal(100);
   });
 });
