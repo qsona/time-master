@@ -2,8 +2,8 @@ var chai = require('chai');
 var expect = chai.expect;
 var assert = chai.assert;
 
-var clockManager = require('../lib/clockmanager');
-var _Date = clockManager.WrappedDate;
+var TimeMaster = require('../lib/clockmanager');
+var _Date = TimeMaster.WrappedDate;
 
 var ALLOWED_DELAY_MS = 30;
 function nearlyEqual(oldTime, newTime) {
@@ -60,13 +60,13 @@ describe('WrappedDate performs as date', function() {
   });
 });
 
-describe('delay', function() {
+describe('forward', function() {
   var ONE_HOUR = 60 * 60 * 1000;
 
-  afterEach(clockManager.clear);
+  afterEach(TimeMaster.clear);
 
   it('should put back', function() {
-    clockManager.delay(ONE_HOUR);
+    TimeMaster.forward(ONE_HOUR);
     var date1 = new Date();
     var date2 = new _Date();
     assert(nearlyEqual(date1.getTime(), date2.getTime() - ONE_HOUR), 'yeah');
@@ -74,7 +74,7 @@ describe('delay', function() {
 
   // TODO
   it('should makimodoshi (opposite of "put back")', function() {
-    clockManager.delay(-ONE_HOUR);
+    TimeMaster.forward(-ONE_HOUR);
     var date1 = new Date();
     var date2 = new _Date();
     assert(nearlyEqual(date1.getTime() - ONE_HOUR, date2.getTime()), 'yeah');
@@ -84,17 +84,17 @@ describe('delay', function() {
 
 describe('freeze', function() {
   beforeEach(function(done) {
-    clockManager.freeze();
+    TimeMaster.freeze();
     done();
   });
   afterEach(function(done) {
-    clockManager.clear();
+    TimeMaster.clear();
     done();
   });
 
   it('should return constant time', function(done) {
     var beforeFreeze = _Date.now();
-    clockManager.freeze();
+    TimeMaster.freeze();
 
     var firstNow = _Date.now();
     var firstDate = new _Date();
@@ -106,7 +106,7 @@ describe('freeze', function() {
       assert.equal(firstDate.toString(), secondDate.toString());
       assert.equal(firstDate.getTime(), firstNow);
 
-      expect(clockManager.isFrozen()).to.be.true;
+      expect(TimeMaster.isFrozen()).to.be.true;
       done();
     }, 10);
   });
@@ -134,18 +134,18 @@ describe('WrappedDate should have static methods', function() {
   });
 });
 
-describe('expose', function() {
+describe('overwrite', function() {
   it('should override global Date', function() {
-    clockManager.freeze(100);
+    TimeMaster.freeze(100);
     expect(_Date.now()).to.equal(100);
 
-    clockManager.expose();
+    TimeMaster.overwrite();
     expect(Date).to.equal(_Date);
     expect(Date.now()).to.equal(100);
     var date = new Date(Date.UTC(1970, 0, 1));
     expect(date.getTime()).to.equal(0);
 
-    clockManager.unexpose();
+    TimeMaster.unoverwrite();
     expect(Date).to.not.equal(_Date);
     expect(Date.now()).to.not.equal(100);
     expect(_Date.now()).to.equal(100);

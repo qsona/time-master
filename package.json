@@ -1,5 +1,5 @@
 {
-  "name": "clockmanager",
+  "name": "time-master",
   "version": "0.0.1",
   "main": "lib/clockmanager.js",
   "devDependencies": {

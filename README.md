@@ -1,4 +1,4 @@
-Configure (delay or freeze) JavaScript's clock
+Configure (forward, rewind or freeze) JavaScript's clock
 
 Currently, it only supports Node.js. Any pull requests are welcomed.
 
@@ -10,18 +10,18 @@ Coming soon
 ### Node.js
 
 ```
-var clockManager = require('clockmanager.js');
+var TimeMaster = require('time-master.js');
 ```
 
 ## Documentation
 
-### clockManager.WrappedDate
-Results of `WrappedDate.now()` and `new WrappedDate()` are different from ones of `Date` if the clockManager is configured (delayed or frozen). Except for those, `WrappedDate` is same as `Date`.
+### TimeMaster.WrappedDate
+Results of `WrappedDate.now()` and `new WrappedDate()` are different from ones of `Date` if the TimeMaster is configured (forwarded or frozen). Except for those, `WrappedDate` is same as `Date`.
 
 ```
-var WrappedDate = clockManager.WrappedDate;
+var WrappedDate = TimeMaster.WrappedDate;
 
-clockManager.freeze(1500000000000);
+TimeMaster.freeze(1500000000000);
 WrappedDate.now(); // 1500000000000
 new WrappedDate().getTime(); // 1500000000000
 
@@ -34,28 +34,28 @@ WrappedDate.parse();
 
 Warning: `Date()` (without `new`) returns a string but `WrappedDate()` returns a Date object. It is due to a technical reason. `Date()` should not be used in my personal opinion, anyway it is the only incompatibility.
 
-### clockManager.delay
+### TimeMaster.forward
 
-### clockManager.getDelay
+### TimeMaster.getLag
 
-### clockManager.freeze
+### TimeMaster.freeze
 
-### clockManager.isFrozen
+### TimeMaster.isFrozen
 
-### clockManager.clear
-Clear settings (delay/freeze) of clockManager.
+### TimeMaster.clear
+Clear settings (forward/rewind/freeze) of TimeMaster.
 
-### clockManager.expose
-expose `WrapperDate` to global Date. It is dangerous so it should not be used in a production environment.
+### TimeMaster.overwrite
+overwrite global `Date` with `WrapperDate`. It is dangerous so it should not be used in a production environment.
 
 ```
-clockManager.expose();
-Date === clockManager.WrapperDate; // true
+TimeMaster.overwrite();
+Date === TimeMaster.WrapperDate; // true
 ```
 
-### clockManager.isExposed
+### TimeMaster.isOverwritten
 
-### clockManager.unexpose
+### TimeMaster.unoverwrite
 
 ## License
 
