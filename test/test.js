@@ -119,7 +119,7 @@ describe('freeze', function() {
   });
 });
 
-describe('WrappedDate should have static methods', function() {
+describe('WrappedDate and OriginalDate', function() {
   it('WrappedDate should have static methods', function() {
     expect(_Date.parse).to.equal(Date.parse);
     expect(_Date.UTC).to.equal(Date.UTC);
@@ -131,6 +131,10 @@ describe('WrappedDate should have static methods', function() {
     for (var key in _Date) {
       assert.fail();
     }
+  });
+
+  it('OriginalDate is equals to an original Date', function() {
+    expect(TimeMaster.OriginalDate).to.equal(Date);
   });
 });
 

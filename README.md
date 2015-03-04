@@ -1,6 +1,6 @@
 Configure (forward, rewind or freeze) JavaScript's clock
 
-Currently, it only supports Node.js. Any pull requests are welcomed.
+Currently, it only supports Node.js. Any pull requests are welcome.
 
 ## usage
 
@@ -55,7 +55,7 @@ Date === TimeMaster.WrapperDate; // true
 
 ### TimeMaster.isOverwritten
 
-### TimeMaster.unoverwrite
+### TimeMaster.cancelOverwriting
 
 ## License
 
