@@ -1,6 +1,6 @@
 {
   "name": "time-master",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/timemaster.js",
   "devDependencies": {
     "chai": "=2.1.0",

@@ -10,7 +10,7 @@ Coming soon
 ### Node.js
 
 ```
-var TimeMaster = require('time-master.js');
+var TimeMaster = require('time-master');
 ```
 
 ## Documentation
