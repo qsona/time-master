@@ -1,7 +1,7 @@
 {
   "name": "time-master",
   "version": "0.0.1",
-  "main": "lib/clockmanager.js",
+  "main": "lib/timemaster.js",
   "devDependencies": {
     "mocha": "*",
     "chai": "*"

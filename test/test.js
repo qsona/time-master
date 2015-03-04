@@ -2,7 +2,7 @@ var chai = require('chai');
 var expect = chai.expect;
 var assert = chai.assert;
 
-var TimeMaster = require('../lib/clockmanager');
+var TimeMaster = require('../lib/timemaster');
 var _Date = TimeMaster.WrappedDate;
 
 var ALLOWED_DELAY_MS = 30;
@@ -145,7 +145,7 @@ describe('overwrite', function() {
     var date = new Date(Date.UTC(1970, 0, 1));
     expect(date.getTime()).to.equal(0);
 
-    TimeMaster.unoverwrite();
+    TimeMaster.cancelOverwriting();
     expect(Date).to.not.equal(_Date);
     expect(Date.now()).to.not.equal(100);
     expect(_Date.now()).to.equal(100);
