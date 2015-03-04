@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "main": "lib/timemaster.js",
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
+    "chai": "=2.1.0",
+    "mocha": "=2.1.0"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha test/"
