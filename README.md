@@ -46,11 +46,11 @@ Warning: `Date()` (without `new`) returns a string but `WrappedDate()` returns a
 Clear settings (forward/rewind/freeze) of TimeMaster.
 
 ### TimeMaster.overwrite
-overwrite global `Date` with `WrapperDate`. It is dangerous so it should not be used in a production environment.
+overwrite global `Date` with `WrappedDate`. It is dangerous so it should not be used in a production environment.
 
 ```
 TimeMaster.overwrite();
-Date === TimeMaster.WrapperDate; // true
+Date === TimeMaster.WrappedDate; // true
 ```
 
 ### TimeMaster.isOverwritten
